@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Dashboard\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function() {
+	Route::get('dashboard', Dashboard::class)->name('dashboard');
+});
+
+Route::group(['middleware' => ['auth', 'role:admin']], function() {
+
+});
+
+Route::group(['middleware' => ['auth', 'role:user']], function() {
+
+});
 
 require __DIR__.'/auth.php';
