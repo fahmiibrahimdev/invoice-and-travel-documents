@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Dashboard\Dashboard;
+use App\Http\Livewire\Item\MasterItem;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
-
+	Route::get('master-item', MasterItem::class)->name('master-item');
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function() {

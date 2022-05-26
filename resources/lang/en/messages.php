@@ -26,4 +26,17 @@ return [
 		'invoice'	=> 'Invoice Report',
 		'basp'		=> 'Sale and Price Report'
 	],
+	'alert'			=> [
+		'type'		=> 'success',
+		'success'	=> 'Successfully!',
+		'created'	=> 'Data Created Successfully!',
+		'updated'	=> 'Data Updated Successfully!',
+		'delete'	=> [
+			'notice'	=> 'If you delete the data, the data cant be restored',
+			'deleted'	=> 'Data Deleted Successfully!',
+			'title'		=> 'Are you sure?',
+			'confirm'	=> 'Yes, delete it!'
+		],
+		
+	]
 ];

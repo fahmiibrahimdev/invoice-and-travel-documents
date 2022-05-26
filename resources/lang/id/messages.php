@@ -26,4 +26,17 @@ return [
 		'invoice'	=> 'Laporan Invoice',
 		'basp'		=> 'Laporan Harga Jual-Beli'
 	],
+	'alert'			=> [
+		'type'		=> 'success',
+		'success'	=> 'Berhasil!',
+		'created'	=> 'Data Berhasil Ditambahkan!',
+		'updated'	=> 'Data Berhasil Diubah!',
+		'delete'	=> [
+			'notice'	=> 'Jika kamu hapus data tersebut, data tersebut tidak dapat dikembalikan!',
+			'deleted'	=> 'Data Berhasil Dihapus!',
+			'title'		=> 'Apa anda yakin?',
+			'confirm'	=> 'Ya, Hapus!'
+		],
+		
+	],
 ];

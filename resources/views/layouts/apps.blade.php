@@ -163,7 +163,7 @@
 												</a>
 												<ul class="dropdown-menu">
 													<li class="nav-item">
-														<a href="#" class="nav-link">
+														<a href="{{ route('master-item') }}" class="nav-link">
 															{{ __('messages.item.master') }}
 														</a>
 													</li>
@@ -208,7 +208,7 @@
 										
 										{{-- Outstanding --}}
 											<li class="nav-item">
-												<a href="#" class="nav-link">Outstanding Fabrikasi</a>
+												<a href="#" class="nav-link">Outstanding {{ __('messages.fabrication') }}</a>
 											</li>
 											<li class="nav-item">
 												<a href="#" class="nav-link">Outstanding Cleaning Supply</a>
@@ -398,6 +398,26 @@
 				$("#tambahDataModal").modal("hide");
 				$("#ubahDataModal").modal("hide");
 			});
+			window.addEventListener("swal", function () {
+			Swal.fire({
+					title: '{{ __('messages.alert.delete.title') }}',
+					text: '{{ __('messages.alert.delete.notice') }}',
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: '{{ __('messages.alert.delete.confirm') }}',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						livewire.emit("deleteConfirmed");
+						Swal.fire(
+							'{{ __('messages.alert.success') }}',
+							'{{ __('messages.alert.delete.deleted') }}',
+							'{{ __('messages.alert.type') }}',
+						);
+					}
+				});
+			});
 			window.addEventListener("swal:modal", function () {
 				Swal.fire({
 					title: event.detail.message,
@@ -420,9 +440,9 @@
 					if (result.isConfirmed) {
 						livewire.emit("activeConfirmed");
 						Swal.fire(
-							"Success!", 
-							"Data updated successfully", 
-							"success"
+							'{{ __('messages.alert.success') }}',
+							'{{ __('messages.alert.updated') }}',
+							'{{ __('messages.alert.type') }}',
 						);
 					}
 				});
@@ -441,9 +461,9 @@
 					if (result.isConfirmed) {
 						livewire.emit("unactiveConfirmed");
 						Swal.fire(
-							"Success!", 
-							"Data updated successfully", 
-							"success"
+							'{{ __('messages.alert.success') }}',
+							'{{ __('messages.alert.updated') }}',
+							'{{ __('messages.alert.type') }}',
 						);
 					}
 				});
