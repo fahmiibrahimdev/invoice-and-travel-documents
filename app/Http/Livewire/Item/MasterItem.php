@@ -10,13 +10,15 @@ class MasterItem extends Component
 {
 	use WithPagination;
 	protected $listeners = [
-		'deleteConfirmed' => 'delete'
+		'deleteConfirmed' => 'delete',
+		'deleteCheckedData',
 	];
 	public $name_of_goods, $item_code, $item_unit, $price_of_goods, $types_of_goods;
 	public $searchTerm, $lengthData;
 	public $updateMode = false;
 	public $idRemoved = NULL;
 	public $paginationTheme = 'bootstrap';
+	public $checkedId = [];
 
 	public function mount()
 	{
@@ -142,6 +144,25 @@ class MasterItem extends Component
 	public function delete()
 	{
 		Goods::findOrFail($this->idRemoved)->delete();
+		$this->checkedId = [];
+	}
+
+	public function deleteData()
+	{
+		$this->dispatchBrowserEvent('swal:deleteChecked', [
+			'checkedIDs'	=> $this->checkedId
+		]);
+	}
+
+	public function deleteCheckedData($ids)
+	{
+		Goods::whereKey($ids)->delete();
+		$this->checkedId = [];
+	}
+
+	public function isChecked($dataIDs)
+	{
+		return in_array($dataIDs, $this->checkedId) ? 'bg-light' : '';
 	}
 
 }

@@ -418,6 +418,26 @@
 					}
 				});
 			});
+			window.addEventListener("swal:deleteChecked", function (event) {
+				Swal.fire({
+					title: '{{ __('messages.alert.delete.title') }}',
+					text: '{{ __('messages.alert.delete.notice') }}',
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: '{{ __('messages.alert.delete.confirm') }}',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						window.livewire.emit("deleteCheckedData",event.detail.checkedIDs);
+						Swal.fire(
+							'{{ __('messages.alert.success') }}',
+							'{{ __('messages.alert.delete.deleted') }}',
+							'{{ __('messages.alert.type') }}',
+						);
+					}
+				});
+			});
 			window.addEventListener("swal:modal", function () {
 				Swal.fire({
 					title: event.detail.message,

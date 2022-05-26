@@ -39,4 +39,13 @@ return [
 		],
 		
 	],
+	'name'			=> 'Nama',
+	'price'			=> 'Harga',
+	'types'			=> 'Jenis',
+	'items'			=> [
+		'item code'	=> 'Kode Barang',
+		'item unit'	=> 'Satuan Barang',
+		'price of goods'	=> 'Harga Barang',
+		'types of goods'	=> 'Jenis Barang'
+	]
 ];
