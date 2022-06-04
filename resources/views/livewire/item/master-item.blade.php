@@ -22,6 +22,9 @@
 										<option value="10">10</option>
 										<option value="25">25</option>
 										<option value="50">50</option>
+										<option value="100">100</option>
+										<option value="250">250</option>
+										<option value="500">500</option>
 									</select>
 								</div>
 								<div class="col-8 col-lg-4 ml-auto">
@@ -35,14 +38,14 @@
 							<div class="table-responsive">
 								<table class="tw-table-fixed tw-w-full tw-text-black tw-text-md mt-4 tw-border-collapse tw-border">
 									<thead>
-										<tr class="tw-bg-gray-50 tw-border-b tw-text-xs text-center text-uppercase">
-											<th class="p-3 tw-border text-center" width="5%"><i class="far fa-align-center"></i></th>
-											<th class="p-3 tw-border" width="30%">{{ __('messages.name') }}</th>
-											<th class="p-3 tw-border" width="12%">{{ __('messages.items.item code') }}</th>
-											<th class="p-3 tw-border" width="15%">{{ __('messages.items.item unit') }}</th>
-											<th class="p-3 tw-border" width="13%">{{ __('messages.price') }} ({{ __('messages.currency') }})</th>
-											<th class="p-3 tw-border" width="10%">{{ __('messages.types') }}</th>
-											<th class="p-3 tw-border text-center" width="13%">
+										<tr class="tw-border-b tw-text-xs text-center text-uppercase">
+											<th class="p-3 text-center" width="7%"><i class="far fa-align-center"></i></th>
+											<th class="p-3" width="20%">{{ __('messages.name') }}</th>
+											<th class="p-3" width="12%">{{ __('messages.items.item code') }}</th>
+											<th class="p-3" width="15%">{{ __('messages.items.item unit') }}</th>
+											<th class="p-3" width="10%">{{ __('messages.price') }} ({{ __('messages.currency') }})</th>
+											<th class="p-3" width="10%">{{ __('messages.types') }}</th>
+											<th class="p-3 text-center" width="13%">
 												@if($checkedId)
 													<button class="btn btn-danger btn-sm ml-auto" wire:click="deleteData()">
 														<i class="fas fa-trash"></i> 
@@ -55,18 +58,17 @@
 									<tbody>
 										@forelse ($data as $row)
 										<tr class="tw-bg-white text-uppercase tw-border tw-border-gray-200 hover:tw-bg-gray-50 {{ $this->isChecked($row->id) }}">
-											<td class="px-2 py-1 text-center tw-border">
+											<td class="p-3 text-center">
 												<input type="checkbox" value="{{ $row->id }}" wire:model="checkedId">
 											</td>
-											<td class="px-2 py-1 tw-border">{{ $row->name_of_goods }}</td>
-											<td class="px-2 py-1 tw-border text-center">{{ $row->item_code }}</td>
-											<td class="px-2 py-1 tw-border text-center">{{ $row->item_unit }}</td>
-											<td class="px-2 py-1 text-right">
-												{{ __('messages.currency') }}
+											<td class="p-3">{{ $row->name_of_goods }}</td>
+											<td class="p-3 text-center">{{ $row->item_code }}</td>
+											<td class="p-3 text-center">{{ $row->item_unit }}</td>
+											<td class="p-3 text-right">
 													{{ number_format($row->price_of_goods, 0, ',', '.') }},00
 											</td>
-											<td class="px-2 py-1 tw-border">{{ $row->types_of_goods }}</td>
-											<td class="px-2 py-1 text-center tw-border">
+											<td class="p-3">{{ $row->types_of_goods }}</td>
+											<td class="p-3 text-center">
 												<button class="btn btn-primary" data-toggle="modal" data-target="#ubahDataModal" wire:click="edit({{ $row->id }})">
 													<i class="fas fa-edit"></i>
 												</button>

@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Dashboard\Dashboard;
+use App\Http\Livewire\IncomingGoods\IncomingGoods;
 use App\Http\Livewire\Item\MasterItem;
+use App\Http\Livewire\StockOfGoods\StockOfGoods;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
 	Route::get('master-item', MasterItem::class)->name('master-item');
+	Route::get('incoming-goods', IncomingGoods::class)->name('incoming-goods');
+	Route::get('stock-of-goods', StockOfGoods::class)->name('stock-of-goods');
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function() {

@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="{{ asset('/select2/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}?_={{ rand(1000,2000) }}">
 
@@ -168,12 +169,12 @@
 														</a>
 													</li>
 													<li class="nav-item">
-														<a href="#" class="nav-link">
+														<a href="{{ route('incoming-goods') }}" class="nav-link">
 															{{ __('messages.item.incoming') }}
 														</a>
 													</li>
 													<li class="nav-item">
-														<a href="#" class="nav-link">
+														<a href="{{ route('stock-of-goods') }}" class="nav-link">
 															{{ __('messages.item.stock') }}
 														</a>
 													</li>
@@ -211,10 +212,10 @@
 												<a href="#" class="nav-link">Outstanding {{ __('messages.fabrication') }}</a>
 											</li>
 											<li class="nav-item">
-												<a href="#" class="nav-link">Outstanding Cleaning Supply</a>
+												<a href="#" class="nav-link">Outstanding CS</a>
 											</li>
 											<li class="nav-item">
-												<a href="#" class="nav-link">Outstanding General Supply</a>
+												<a href="#" class="nav-link">Outstanding GS</a>
 											</li>
 										{{-- Outstanding --}}
 										

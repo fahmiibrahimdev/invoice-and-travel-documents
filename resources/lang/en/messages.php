@@ -38,5 +38,5 @@ return [
 			'confirm'	=> 'Yes, delete it!'
 		],
 		
-	]
+	],
 ];

@@ -14,12 +14,17 @@ class MasterItem extends Component
 		'deleteCheckedData',
 	];
 	public $name_of_goods, $item_code, $item_unit, $price_of_goods, $types_of_goods;
-	public $searchTerm, $lengthData;
+	public $searchTerm, $lengthData; // search dan sorting
 	public $updateMode = false;
-	public $idRemoved = NULL;
-	public $paginationTheme = 'bootstrap';
-	public $checkedId = [];
+	public $idRemoved = NULL; // mendifinisikan id untuk hapus data
+	public $paginationTheme = 'bootstrap'; // mendifinisikan pagination bertema bootstrap
+	public $checkedId = []; // menghapus data banyak yang ditampung ke array
 
+
+	/**
+	 * @description function mount() untuk mengisi value dari inputan
+	 * @see https://laravel-livewire.com/docs/2.x/rendering-components
+	 */
 	public function mount()
 	{
 		$this->name_of_goods = '';
@@ -29,6 +34,10 @@ class MasterItem extends Component
 		$this->types_of_goods = NULL;
 	}
 
+	/**
+	 * @description function resetInputFields() untuk mereset value inputan, dan menggantikan value baru
+	 * @see https://laravel-livewire.com/docs/2.x/properties
+	 */
 	public function resetInputFields()
 	{
 		$this->name_of_goods = '';
@@ -36,13 +45,16 @@ class MasterItem extends Component
 		$this->price_of_goods = 0;
 		$this->types_of_goods = NULL;
 	}
-
 	public function cancel()
 	{
 		$this->updateMode = false;
 		$this->resetInputFields();
 	}
 
+	/**
+	 * @description function render() untuk merender data dari database ke view
+	 * @see https://laravel-livewire.com/docs/2.x/rendering-components
+	 */
     public function render()
     {
 		$searchTerm = '%'.$this->searchTerm.'%';
@@ -60,6 +72,9 @@ class MasterItem extends Component
 		->extends('layouts.apps', ['title' => 'Data Master Item']);
     }
 
+	/**
+	 * @description function store() untuk store data dari inputan ke database
+	 */
 	public function store()
 	{
 		$this->validate([
@@ -89,6 +104,9 @@ class MasterItem extends Component
 		$this->emit('dataStore');
 	}
 
+	/**
+	 * @description function edit() untuk mengambil data dari database ke dalam inputan
+	 */
 	public function edit($id)
 	{
 		$this->updateMode = true;
@@ -101,6 +119,9 @@ class MasterItem extends Component
 		$this->types_of_goods = $data->types_of_goods;
 	}
 
+	/**
+	 * @description function update() untuk mengubah data dari inputan ke dalam database
+	 */
 	public function update()
 	{
 		$this->validate([
@@ -135,18 +156,28 @@ class MasterItem extends Component
 		}
 	}
 	
+	/**
+	 * @description function deleteConfirm() untuk menampilkan alert ketika menghapus data
+	 * @param id = public $idRemoved;
+	 */
 	public function deleteConfirm($id)
 	{
 		$this->idRemoved = $id;
 		$this->dispatchBrowserEvent('swal');
 	}
 
+	/**
+	 * @description function delete() untuk menghapus data
+	 */
 	public function delete()
 	{
 		Goods::findOrFail($this->idRemoved)->delete();
 		$this->checkedId = [];
 	}
 
+	/**
+	 * @description function deleteData() untuk menampilkan alert ketika menghapus pada data tertentu
+	 */
 	public function deleteData()
 	{
 		$this->dispatchBrowserEvent('swal:deleteChecked', [
@@ -154,12 +185,18 @@ class MasterItem extends Component
 		]);
 	}
 
+	/**
+	 * @description function deleteData() untuk menghapus data tertentu dengan whereKey({id})
+	 */
 	public function deleteCheckedData($ids)
 	{
 		Goods::whereKey($ids)->delete();
 		$this->checkedId = [];
 	}
 
+	/**
+	 * @description function deleteData() untuk mengubah tampilan background pada table jika data ada yang dipilih
+	 */
 	public function isChecked($dataIDs)
 	{
 		return in_array($dataIDs, $this->checkedId) ? 'bg-light' : '';
