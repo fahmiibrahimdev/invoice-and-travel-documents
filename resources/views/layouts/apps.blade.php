@@ -189,7 +189,7 @@
 
 										{{-- Data Project Non PO --}}
 											<li class="nav-item">
-												<a href="#" class="nav-link">Data Project Non PO</a>
+												<a href="{{ route('pbo') }}" class="nav-link">Data Project Non PO</a>
 											</li>
 										{{-- Data Project Non PO --}}
 
@@ -198,7 +198,7 @@
 												<a href="#" class="nav-link has-dropdown">Quotation</a>
 												<ul class="dropdown-menu">
 													<li class="nav-item">
-														<a href="#" class="nav-link">Quotation</a>
+														<a href="{{ route('no-quotation') }}" class="nav-link">Quotation</a>
 													</li>
 													<li class="nav-item">
 														<a href="#" class="nav-link">All Quotation</a>

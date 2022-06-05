@@ -13,8 +13,7 @@ class StockOfGoods extends Component
 	protected $listeners = [
 		'deleteConfirmed'	=> 'delete',
 	];
-	public $name_of_goods, $item_code, $price_of_goods;
-	public $dataInventory = [];
+	public $name_of_goods, $item_code, $price_of_goods, $idDataInventory;
 	public $searchTerm, $lengthData;
 	protected $paginationTheme = 'bootstrap';
 	
@@ -22,7 +21,8 @@ class StockOfGoods extends Component
     {
 		$searchTerm = '%'.$this->searchTerm.'%';
 		$lengthData = $this->lengthData;
-
+		$dataInventory = Inventory::where('id_item', $this->idDataInventory)->paginate(15,['*'], 'inventories');
+		$totalQty = Inventory::where('id_item', $this->idDataInventory)->sum('qty');
 		$data = Goods::from('goods as a')
 					->select('a.*')
 					->join('inventories as b', 'b.id_item', 'a.id')
@@ -34,16 +34,16 @@ class StockOfGoods extends Component
 						$query->orWhere('a.stock', 'LIKE', $searchTerm);
 					})
 					->orderBy('a.id', 'DESC')
-					->paginate($lengthData);
+					->groupBy('a.id')
+					->paginate($lengthData, ['*'], 'goods');
 
-        return view('livewire.stock-of-goods.stock-of-goods', compact('data'))
+        return view('livewire.stock-of-goods.stock-of-goods', compact('data', 'dataInventory', 'totalQty'))
 		->extends('layouts.apps', ['title' => 'Stock Of Goods']);
     }
 
 	public function view($id)
 	{
-		$dataInventories = Inventory::where('id_item', $id)->get();
-		$this->dataInventory = $dataInventories;
+		$this->idDataInventory = $id;
 		$items = Goods::where('id', $id)->first();
 		$this->name_of_goods = $items->name_of_goods;
 		$this->item_code = $items->item_code;

@@ -39,11 +39,11 @@
 								<table class="tw-table-fixed tw-w-full tw-text-black tw-text-md mt-4 tw-border-collapse tw-border">
 									<thead>
 										<tr class="tw-border-b tw-text-xs text-center text-uppercase">
-											<th class="p-3" width="18%">Nama Barang</th>
-											<th class="p-3" width="12%">Kode Barang</th>
-											<th class="p-3" width="13%">Satuan</th>
-											<th class="p-3" width="7%">Stock Barang</th>
-											<th class="p-3 text-center" width="13%"></th>
+											<th class="p-3" width="50%">Nama Barang</th>
+											<th class="p-3" width="17%">Kode Barang</th>
+											<th class="p-3" width="12%">Satuan</th>
+											<th class="p-3" width="15%">Stock</th>
+											<th class="p-3 text-center" width="10%"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -70,7 +70,7 @@
 								</table>
 							</div>
 							<div class="table-responsive p-3">
-								{{ $data->links() }}
+								{{ $data->appends(['goods' => $data->currentPage()])->links() }}
 							</div>
 						{{-- Table --}}
                     </div>
@@ -94,11 +94,11 @@
 					<div class="card card-primary mt-2 tw-shadow-lg tw-rounded-lg">
 						<div class="card-header">
 							<p class="font-weight-bold tw-text-lg">{{ $item_code }}</p>
-							<p class="ml-auto"><span class="font-weight-bold">Total: </span>106</p>
+							<p class="ml-auto"><span class="font-weight-bold">Total Qty: </span>{{ $totalQty }}</p>
 						</div>
 						<div class="card-body">
 							<p class="tw-text-sm font-weight-bold">{{ $name_of_goods }}</p>
-							<p>Rp150.203,00</p>
+							<p><b>Harga Barang:</b> {{ __('messages.currency') }}{{ number_format((int)$price_of_goods, 0, ',', '.') }},00</p>
 						</div>
 						<div class="px-0">
 							<div class="table-responsive">
@@ -111,13 +111,16 @@
 									</thead>
 									<tbody>
 									@foreach($dataInventory as $inventories)
-										<tr class="tw-bg-white text-uppercase tw-border tw-border-gray-200 hover:tw-bg-gray-50">
-											<td class="p-3 text-center">{{ $inventories->qty }}</td>
-											<td class="p-3 text-center">{{ __('messages.currency') }}{{ number_format((int)$inventories->purchase_price, 0, ',', '.') }},00</td>
+										<tr class="tw-bg-white tw-border tw-border-gray-200 hover:tw-bg-gray-50">
+											<td class="p-3 text-center">{{ $inventories->qty }},00</td>
+											<td class="p-3">{{ __('messages.currency') }}<span class="float-right">{{ number_format((int)$inventories->purchase_price, 0, ',', '.') }},00</span></td>
 										</tr>
 									@endforeach
 									</tbody>
 								</table>
+							</div>
+							<div class="table-responsive p-3">
+								{{ $dataInventory->appends(['inventories' => $dataInventory->currentPage()])->links() }}
 							</div>
 						</div>
 					</div>
